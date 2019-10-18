@@ -6,11 +6,18 @@ view: contact {
     label: "Contact ID"
     type: string
     sql: ${TABLE}."CONTACT_ID" ;;
+    html: <a href={{contact_url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
+  }
+
+  dimension: contact_url {
+    hidden: yes
+    sql: "https://go.xero.com/Contacts/View/"||${contact_id} ;;
   }
 
   dimension: contact {
     type: string
     sql: ${TABLE}."CONTACT" ;;
+    html: <a href={{contact_url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension: contact_status {
