@@ -79,7 +79,8 @@ view: invoice {
   }
 
   dimension: is_paid {
-    type: string
+    label: "Paid"
+    type: yesno
     sql: ${TABLE}."IS_PAID" ;;
   }
 
@@ -110,6 +111,42 @@ view: invoice {
     sql: ${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL" ;;
   }
 
+  dimension: current_payment_offset {
+    #  hidden:  yes
+    type: number
+    sql: datediff('day', ${TABLE}."DUE_DATE", current_date) ;;
+  }
+
+  dimension: payment_status_group {
+    case: {
+      when: {
+        sql: ${is_paid};;
+        label: "Paid"
+      }
+      when: {
+        sql: ${current_payment_offset} <= -7;;
+        label: "Current"
+      }
+      when: {
+        sql: ${current_payment_offset} > -7 AND ${current_payment_offset} <= 1;;
+        label: "Coming Up"
+      }
+      when: {
+        sql: ${current_payment_offset} > 1 AND ${current_payment_offset} <= 30;;
+        label: "Past Due - <30"
+      }
+      when: {
+        sql: ${current_payment_offset} > 30 AND ${current_payment_offset} <= 60;;
+        label: "Past Due - 30+"
+      }
+      when: {
+        sql: ${current_payment_offset} > 60;;
+        label: "Past Due - 60+"
+      }
+      else:"Unknown"
+    }
+  }
+
   measure: net_amount {
     type: sum
     sql: ${net_amount_dimension} ;;
@@ -121,6 +158,13 @@ view: invoice {
     type: sum
     sql: ${total_amount_dimension} ;;
     value_format_name: usd
+    drill_fields: [invoice_list*]
+  }
+
+  measure: balance_amount {
+    type: number
+    sql: SUM(IFF(${invoice_type}='issued',${total_amount},${total_amount}*-1)) ;;
+    value_format: "$# ### ##0.00; ($# ### ##0.00)"
     drill_fields: [invoice_list*]
   }
 
