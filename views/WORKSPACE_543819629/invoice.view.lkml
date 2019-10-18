@@ -98,18 +98,38 @@ view: invoice {
     sql: ${TABLE}."PAID_ON" ;;
   }
 
-  dimension: total_amount_original {
+  dimension: net_amount_dimension {
     type: number
+    hidden: yes
     sql: ${TABLE}."TOTAL_AMOUNT_ORIGINAL" ;;
   }
 
-  dimension: total_amount_with_vat_original {
+  dimension: total_amount_dimension {
     type: number
+    hidden: yes
     sql: ${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL" ;;
   }
 
-  measure: count {
+  measure: net_amount {
+    type: sum
+    sql: ${net_amount_dimension} ;;
+    value_format_name: usd
+    drill_fields: [invoice_list*]
+  }
+
+  measure: total_amount {
+    type: sum
+    sql: ${total_amount_dimension} ;;
+    value_format_name: usd
+    drill_fields: [invoice_list*]
+  }
+
+  measure: invoice_count {
     type: count
-    drill_fields: [invoice_id, contact.contact_id, invoice_item.count]
+    drill_fields: [invoice_list*]
+  }
+
+  set: invoice_list {
+    fields: [invoice_number,contact.contact,created_date,due_date,invoice_status,total_amount]
   }
 }

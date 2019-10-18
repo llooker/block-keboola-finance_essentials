@@ -50,9 +50,8 @@ datagroup: keboola_block_xero_default_datagroup {
 
 persist_with: keboola_block_xero_default_datagroup
 
-explore: account {}
-
 explore: account_balance {
+  label: "account"
   join: account {
     type: left_outer
     sql_on: ${account_balance.account_id} = ${account.account_id} ;;
@@ -62,15 +61,8 @@ explore: account_balance {
 
 explore: contact {}
 
-explore: invoice {
-  join: contact {
-    type: left_outer
-    sql_on: ${invoice.contact_id} = ${contact.contact_id} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: invoice_item {
+  label: "invoice"
   join: invoice {
     type: left_outer
     sql_on: ${invoice_item.invoice_id} = ${invoice.invoice_id} ;;

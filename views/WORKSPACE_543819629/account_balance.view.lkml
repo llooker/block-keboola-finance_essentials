@@ -20,8 +20,9 @@ view: account_balance {
     sql: ${TABLE}."ACCOUNT_ID" ;;
   }
 
-  dimension: balance_original {
+  dimension: balance_original_dimension {
     type: number
+    hidden: yes
     sql: ${TABLE}."BALANCE_ORIGINAL" ;;
   }
 
@@ -44,6 +45,20 @@ view: account_balance {
     type: string
     sql: ${TABLE}."LAST_DAY_OF_MONTH" ;;
   }
+
+  measure: account_balance_total {
+    type: sum
+    sql: ${balance_original_dimension} ;;
+    value_format_name: usd
+    drill_fields: [account.account,account_balance_total]
+  }
+
+measure: account_balance_average {
+  type: average
+  sql: ${balance_original_dimension} ;;
+  value_format_name: usd
+  drill_fields: [account.account,account_balance_average]
+}
 
   measure: count {
     type: count
