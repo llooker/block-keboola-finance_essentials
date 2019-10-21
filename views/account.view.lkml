@@ -34,6 +34,12 @@ view: account {
     sql: ${TABLE}."ACCOUNT_TYPE" ;;
   }
 
+  dimension: default_link {
+    type: string
+    sql: 'default' ;;
+    description: "Dummy dimension for explore result merging purposes only"
+  }
+
   measure: count {
     type: count
     drill_fields: [account_id, account_balance.count]

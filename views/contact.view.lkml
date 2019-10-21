@@ -30,6 +30,12 @@ view: contact {
     sql: ${TABLE}."EMAIL" ;;
   }
 
+  dimension: default_link {
+    type: string
+    sql: 'default' ;;
+    description: "Dummy dimension for explore result merging purposes only"
+  }
+
   measure: count {
     type: count
     drill_fields: [contact_id, invoice.count]
