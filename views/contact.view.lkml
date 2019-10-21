@@ -33,6 +33,7 @@ view: contact {
   dimension: default_link {
     type: string
     sql: 'default' ;;
+    hidden: yes
     description: "Dummy dimension for explore result merging purposes only"
   }
 

@@ -36,6 +36,7 @@ view: account {
 
   dimension: default_link {
     type: string
+    hidden: yes
     sql: 'default' ;;
     description: "Dummy dimension for explore result merging purposes only"
   }
