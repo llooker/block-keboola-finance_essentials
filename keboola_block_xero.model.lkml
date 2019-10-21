@@ -43,6 +43,9 @@ connection: "@{connection}"
 # include all the views
 include: "/views/**/*.view"
 
+# include all lookml dashboards
+include: "*.dashboard.lookml"
+
 datagroup: keboola_block_xero_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
