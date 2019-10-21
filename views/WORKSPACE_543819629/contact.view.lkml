@@ -11,7 +11,7 @@ view: contact {
 
   dimension: contact_url {
     hidden: yes
-    sql: "https://go.xero.com/Contacts/View/"||${contact_id} ;;
+    sql: 'https://go.xero.com/Contacts/View/'||${contact_id} ;;
   }
 
   dimension: contact {
