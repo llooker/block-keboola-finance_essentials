@@ -18,3 +18,6 @@ This block is built above data obtained from Xero Accounting API, so it’s avai
 The **Keboola Scaffold** will set up everything for you - from Xero data extraction to data transformation, to setting up the Snowflake database with necessary tables for the LookML. All you need to do is set up the connection to the database in Looker and add it to the Looker model.
 
 In case you want to enrich your Looker model and dashboards with other fields or objects from your Xero instance, you can modify the whole data extraction and processing directly in Keboola Connection.
+
+
+-----
