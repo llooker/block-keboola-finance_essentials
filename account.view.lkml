@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/account.view"
+
 view: account {
-  sql_table_name: ACCOUNT ;;
+  extends: [account_config]
+}
+
+view: account_core {
+  sql_table_name: @{SCHEMA_NAME}.ACCOUNT ;;
   drill_fields: [account_id]
 
   dimension: account_id {

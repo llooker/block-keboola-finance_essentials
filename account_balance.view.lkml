@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/account_balance.view"
+
 view: account_balance {
-  sql_table_name: ACCOUNT_BALANCE ;;
+  extends: [account_balance_config]
+}
+
+view: account_balance_core {
+  sql_table_name: @{SCHEMA_NAME}.ACCOUNT_BALANCE ;;
   drill_fields: [account_balance_id]
 
   dimension: account_balance_id {

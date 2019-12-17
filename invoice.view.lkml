@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/invoice.view"
+
 view: invoice {
-  sql_table_name: INVOICE ;;
+  extends: [invoice_config]
+}
+
+view: invoice_core {
+  sql_table_name: @{SCHEMA_NAME}.INVOICE ;;
   drill_fields: [invoice_id]
 
   dimension: invoice_id {
@@ -7,13 +13,6 @@ view: invoice {
     primary_key: yes
     type: string
     sql: ${TABLE}."INVOICE_ID" ;;
-    html: <a href={{invoice_url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
-  }
-
-  dimension:  invoice_url {
-    type: string
-    hidden: yes
-    sql: IFF(${invoice_type} = 'issued','https://go.xero.com/AccountsReceivable/View.aspx?InvoiceID='||${invoice_id},'https://go.xero.com/AccountsPayable/View.aspx?InvoiceID='||${invoice_id}) ;;
   }
 
   dimension: contact_id {
@@ -65,7 +64,6 @@ view: invoice {
   dimension: invoice_number {
     type: string
     sql: ${TABLE}."INVOICE_NUMBER" ;;
-    html: <a href={{invoice_url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension: invoice_status {

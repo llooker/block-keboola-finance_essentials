@@ -46,12 +46,12 @@ include: "/views/**/*.view"
 # include all lookml dashboards
 include: "*.dashboard.lookml"
 
-datagroup: keboola_block_xero_default_datagroup {
+datagroup: block_keboola_finance_essentials_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
-persist_with: keboola_block_xero_default_datagroup
+persist_with: block_keboola_finance_essentials_default_datagroup
 
 explore: account_balance {
   label: "Account"
