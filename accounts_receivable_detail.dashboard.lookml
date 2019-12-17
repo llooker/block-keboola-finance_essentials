@@ -12,7 +12,7 @@
     height: 2
   - title: AR Total
     name: AR Total
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: single_value
     fields: [invoice.total_amount]
@@ -26,7 +26,7 @@
     height: 2
   - title: Current AR
     name: Current AR
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: single_value
     fields: [invoice.total_amount]
@@ -42,7 +42,7 @@
     height: 2
   - title: AR Past Due
     name: AR Past Due
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: single_value
     fields: [invoice.total_amount]
@@ -75,7 +75,7 @@
     height: 2
   - title: AR Aging
     name: AR Aging
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: looker_column
     fields: [invoice.payment_status_group, invoice.total_amount_open, invoice.open_invoice_count]
@@ -140,7 +140,7 @@
     height: 10
   - title: Past Offenders
     name: Past Offenders
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: table
     fields: [contact.contact, invoice.total_amount_open, invoice.past_payment_delay_average,
@@ -181,7 +181,7 @@
     height: 10
   - title: 60+ days past due
     name: 60+ days past due
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: single_value
     fields: [invoice.total_amount]

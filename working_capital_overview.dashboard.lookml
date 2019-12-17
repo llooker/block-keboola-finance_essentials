@@ -12,7 +12,7 @@
     height: 2
   - title: AR/AP Aging
     name: AR/AP Aging
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: looker_column
     fields: [invoice.balance_amount, invoice.payment_status_group, invoice.invoice_type]
@@ -83,7 +83,7 @@
     height: 2
   - title: Account Balance History
     name: Account Balance History
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: account_balance
     type: table
     fields: [account_balance.account_balance_total, account.account, account_balance.date_month]
@@ -119,7 +119,7 @@
     height: 8
   - title: AR - AP Balance
     name: AR - AP Balance
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: invoice
     type: single_value
     fields: [invoice.balance_amount]
@@ -191,7 +191,7 @@
     height: 2
   - title: Accounts Balances Total
     name: Accounts Balances Total
-    model: keboola_block_xero
+    model: block_keboola_finance_essentials
     explore: account_balance
     type: single_value
     fields: [account_balance.account_balance_total]
@@ -227,7 +227,7 @@
   - name: Working Capital
     title: Working Capital
     merged_queries:
-    - model: keboola_block_xero
+    - model: block_keboola_finance_essentials
       explore: invoice
       type: single_value
       fields: [invoice.balance_amount, contact.default_link]
@@ -274,7 +274,7 @@
       show_totals_labels: true
       show_silhouette: false
       totals_color: "#808080"
-    - model: keboola_block_xero
+    - model: block_keboola_finance_essentials
       explore: account_balance
       type: table
       fields: [account_balance.account_balance_total, account.default_link]
