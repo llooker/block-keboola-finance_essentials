@@ -38,37 +38,23 @@
 # The connection name can be changed in the manifest file if desired, along with
 # other constants used by this block (Keboola will automatically create a connection
 # with this name
-connection: "@{connection}"
+connection: "@{CONNECTION}"
 
-# include all the views
-include: "/views/**/*.view"
-
-# include all lookml dashboards
+include: "*.view"
+include: "*.explore.lkml"
 include: "*.dashboard.lookml"
-
-datagroup: block_keboola_finance_essentials_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
-
-persist_with: block_keboola_finance_essentials_default_datagroup
+include: "//@{CONFIG_PROJECT_NAME}/*.view.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.mdashboard.lkml"
 
 explore: account_balance {
-  label: "Account"
-  join: account {
-    type: left_outer
-    sql_on: ${account_balance.account_id} = ${account.account_id} ;;
-    relationship: many_to_one
-  }
+  extends: [account_balance_config]
 }
 
-explore: contact {}
+explore: contact {
+  extends: [contact_config]
+}
 
-explore:  invoice {
-
-  join: contact {
-    type: left_outer
-    sql_on: ${invoice.contact_id} = ${contact.contact_id} ;;
-    relationship: many_to_one
-  }
+explore: invoice {
+  extends: [invoice_config]
 }
