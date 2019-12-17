@@ -45,7 +45,7 @@ include: "*.explore.lkml"
 include: "*.dashboard.lookml"
 include: "//@{CONFIG_PROJECT_NAME}/*.view.lkml"
 include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
-include: "//@{CONFIG_PROJECT_NAME}/*.mdashboard.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.dashboard.lkml"
 
 explore: account_balance {
   extends: [account_balance_config]
