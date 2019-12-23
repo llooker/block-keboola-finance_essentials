@@ -68,7 +68,7 @@
   - name: 'scaffold'
     type: text
     title_text: ''
-    subtitle_text: <font size="5px"><font color="#408ef7"><b>Finance - Xero</b></font>
+    subtitle_text: <font size="5px"><font color="#408ef7"><b>Finance Essentials</b></font>
     row: 0
     col: 0
     width: 7
