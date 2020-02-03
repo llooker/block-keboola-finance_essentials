@@ -1,9 +1,10 @@
+
 {
   "label": "Finance Analytics Essentials",
   "category_label": "Models",
   "branding": {
     "image_uri": "https://marketplace-api.looker.com/block-icons/KeboolaBrand.png",
-    "tagline": "Bank account and accounts payable balances data from your accounting package that help you monitor working capital and enhance customer data.",
+    "tagline": "Bank account and accounts payable balances data from your accounting package that help you monitor working capital and enhance customer data."
   },
 
   "constants": {
