@@ -1,0 +1,35 @@
+{
+  "label": "Finance Analytics Essentials",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "https://marketplace-api.looker.com/block-icons/KeboolaBrand.png",
+    "tagline": "Bank account and accounts payable balances data from your accounting package that help you monitor working capital and enhance customer data.",
+  },
+
+  "constants": {
+    "CONNECTION": {
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    },
+    "SCHEMA_NAME": {
+      "label": "Schema Name"
+    },
+    "CONFIG_PROJECT_NAME": {
+      "label": "Config Project Name"
+    }
+  },
+  "models": [
+    {
+      "name": "block_keboola_git",
+      "connection_constant": "CONNECTION"
+    }
+  ],
+  "auxiliary_projects": [
+    {
+      "git_uri": "git://github.com/llooker/block-keboola-finance_essentials-config.git",
+      "git_ref": "d04cb12c344766d1ad5d63218e7a950ea9f39230",
+      "label": "Finance Essentials by Keboola Config",
+      "constant_name": "CONFIG_PROJECT_NAME"
+    }
+  ]
+}
