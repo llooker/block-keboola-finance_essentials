@@ -4,7 +4,7 @@
   elements:
   - name: 'powered by'
     type: text
-    body_text: <a href="https://keboola.com" target="_blank"> <img src="https://www.keboola.com/data/poweredByKeboola.png"
+    body_text: <a href="https://keboola.com" target="_blank"> <img src="https://keboola-resources.s3.amazonaws.com/poweredByKeboola.png"
       width="100%"/>
     row: 0
     col: 18
