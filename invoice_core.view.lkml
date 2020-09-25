@@ -109,38 +109,42 @@ view: invoice_core {
     sql: ${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL" ;;
   }
 
-  dimension: current_payment_offset {
-    hidden:  yes
-    type: number
-    sql: datediff('day', ${TABLE}."DUE_DATE", current_date) ;;
+  dimension_group: current_payment_offset {
+    hidden: yes
+    type: duration
+    intervals: [day]
+    sql_start: ${TABLE}."DUE_DATE" ;;
+    sql_end: current_date ;;
   }
 
-  dimension: past_payment_offset_dimension {
-    hidden:  yes
-    type: number
-    sql: datediff('day', ${TABLE}."DUE_DATE", ${TABLE}."PAID_ON") ;;
+  dimension_group: past_payment_offset {
+    hidden: yes
+    type: duration
+    intervals: [day]
+    sql_start: ${TABLE}."DUE_DATE" ;;
+    sql_end: ${TABLE}."PAID_ON" ;;
   }
 
   dimension: payment_status_group {
     case: {
       when: {
-        sql: ${current_payment_offset} <= -7;;
+        sql: ${days_current_payment_offset} <= -7;;
         label: "Current"
       }
       when: {
-        sql: ${current_payment_offset} > -7 AND ${current_payment_offset} <= 1;;
+        sql: ${days_current_payment_offset} > -7 AND ${days_current_payment_offset} <= 1;;
         label: "Coming Up"
       }
       when: {
-        sql: ${current_payment_offset} > 1 AND ${current_payment_offset} <= 30;;
+        sql: ${days_current_payment_offset} > 1 AND ${days_current_payment_offset} <= 30;;
         label: "Past Due - <30"
       }
       when: {
-        sql: ${current_payment_offset} > 30 AND ${current_payment_offset} <= 60;;
+        sql: ${days_current_payment_offset} > 30 AND ${days_current_payment_offset} <= 60;;
         label: "Past Due - 30+"
       }
       when: {
-        sql: ${current_payment_offset} > 60;;
+        sql: ${days_current_payment_offset} > 60;;
         label: "Past Due - 60+"
       }
       else:"Unknown"
@@ -185,7 +189,11 @@ view: invoice_core {
 
   measure: balance_amount {
     type: sum
-    sql: IFF(${invoice_type}='issued',${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL",${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL"*-1) ;;
+    sql: (CASE
+            WHEN ${invoice_type}='issued'
+            THEN ${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL"
+            ELSE ${TABLE}."TOTAL_AMOUNT_WITH_VAT_ORIGINAL"*-1
+          END) ;;
     value_format: "$# ### ##0.00; ($# ### ##0.00)"
     drill_fields: [invoice_list*]
   }
@@ -206,7 +214,7 @@ view: invoice_core {
 
   measure: past_payment_delay_average {
     type: average
-    sql: ${past_payment_offset_dimension} ;;
+    sql: ${days_past_payment_offset} ;;
     filters: {
       field: is_paid
       value: "true"
@@ -217,7 +225,7 @@ view: invoice_core {
 
   measure: current_payment_delay_average {
     type: average
-    sql: ${current_payment_offset} ;;
+    sql: ${days_current_payment_offset} ;;
     filters: {
       field: is_paid
       value: "false"
